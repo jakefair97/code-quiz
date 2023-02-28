@@ -9,12 +9,56 @@ html {
 
 header {
     padding: 20px 40px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
 }
 
-main {
+button {
+    background-color: purple;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    margin-bottom: 5px; 
+    cursor: pointer;
+}
+
+.page-container {
     text-align: center;
-    margin: auto 40px;
+    margin: auto auto;
+    width: 65vw;
+}
+
+main {
     line-height: 1.6;
+}
+
+#start {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.question-container {
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 30px;
+    text-align: left;
+}
+
+.question-text {
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    width: 4em;
 }

@@ -12,19 +12,22 @@
         <a href="#">View high scores</a>
         <div id="timer"></div>
     </header>
+    <div class="page-container">
     <!-- initial text when page is loaded -->
-    <main id = "main">
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <button id="start">Start Quiz</button> <!-- when start quiz is clicked, main is erased and question elements come up: the question itself and the choices; when any of the choices are clicked, the next question comes up; if the correct answer is clicked, "correct" is displayed at the bottom; else "incorrect" is displayed and 10 seconds are subtracted from the timer; once the quiz is over the score is displayed and user inputs their initials; then hi scores are displayed with the option to go back to home screen or clear the hi scores -->
-    </main>
-
-    <!-- <div id="question">
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-    </div> -->
+        <main id = "main">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <button id="start">Start Quiz</button> 
+            <!-- when start quiz is clicked, main is erased and question elements come up: the question itself and the choices; when any of the choices are clicked, the next question comes up; if the correct answer is clicked, "correct" is displayed at the bottom; else "incorrect" is displayed and 10 seconds are subtracted from the timer; once the quiz is over the score is displayed and user inputs their initials; then hi scores are displayed with the option to go back to home screen or clear the hi scores -->
+        </main>
+        
+        <div id="question" class="question-container">
+            <span class="question-text"></span>
+            <div class="choices">
+            </div>
+            
+        </div>
+    </div>
 
     <script src="./assets/index.js"></script>
 </body>
