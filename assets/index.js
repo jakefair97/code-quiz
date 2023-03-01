@@ -3,6 +3,9 @@ var startBtn = document.getElementById("start");
 var mainEl = document.getElementById("main");
 var question = document.getElementById("question");
 var questionText = document.querySelector(".question-text");
+var questionContainer = document.querySelector(".question-container");
+var feedback = document.querySelector(".feedback");
+var choices = document.querySelector('.choices');
 
 var questions = {
     question1: "Commonly used datatypes do NOT include:",
@@ -51,12 +54,34 @@ startBtn.addEventListener('click', function() {
     timer.textContent = "Time: " + time;
 
     questionText.innerHTML = questions.question1;
+    question.id = 'question1';
    
     for (var i = 0; i < answers.answer1.length; i++) {
         var button = document.createElement("button");
         button.setAttribute("class", "answer");
         button.setAttribute("id", "answer" + i)
         button.innerHTML = answers.answer1[i];
-        document.querySelector(".choices").appendChild(button);
+        choices.appendChild(button);
     }
+})
+
+// When any of the answer buttons are pressed, the elements are populated with the next question
+
+questionContainer.addEventListener("click", function(event){
+    var element = event.target;
+    if (question.id == 'question1') {
+        if (element.innerHTML === correctAnswers.CAnswer1) {
+            feedback.innerHTML = "Correct!";
+        }else {
+            feedback.innerHTML = "Wrong!";
+        }
+        question.id = 'question2';
+        questionText.innerHTML = questions.question2;
+        for (i in choices.children) {
+            choices.children[i].innerHTML = answers.answer2[i];
+        }
+    }
+    
+    console.log(element.innerHTML);
+
 })

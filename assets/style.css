@@ -48,6 +48,15 @@ main {
     text-align: left;
 }
 
+
+.feedback {
+    width: 100%;
+    margin-top: 20px;
+    border-top: solid 2px lightgray;
+    color: lightgray;
+    display: block;
+}
+
 .question-text {
     margin-bottom: 20px;
 }
