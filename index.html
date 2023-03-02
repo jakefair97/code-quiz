@@ -10,7 +10,7 @@
 <body>
     <header>
         <a href="#">View high scores</a>
-        <div id="timer"></div>
+        <span id="timer"></span>
     </header>
     <div class="page-container">
     <!-- initial text when page is loaded -->
@@ -25,9 +25,18 @@
             <span class="question-text"></span>
             <div class="choices">
             </div>
-            <span class="feedback"></span>
             
         </div>
+
+        <div id="high-scores" class='hidden'>
+            <h1>All done!</h1>
+            <p>Your final score is: <span id="score"></span></p>
+            <label for="initials">Enter Initials: </label>
+            <input type="text" class="form-input" name="initials"/>
+            <button id="submit-score">Submit</button>
+        </div>
+        <span class="feedback"></span>
+
     </div>
 
     <script src="./assets/index.js"></script>
