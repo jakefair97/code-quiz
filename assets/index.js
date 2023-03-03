@@ -1,3 +1,4 @@
+var header = document.querySelector("header");
 var timer = document.getElementById("timer");
 var startBtn = document.getElementById("start");
 var mainEl = document.getElementById("main");
@@ -6,9 +7,16 @@ var questionText = document.querySelector(".question-text");
 var questionContainer = document.querySelector(".question-container");
 var feedback = document.querySelector(".feedback");
 var choices = document.querySelector('.choices');
-var highScores = document.getElementById("high-scores");
+var setHighScores = document.getElementById("set-high-scores");
 var score = document.getElementById("score");
 var submitScore = document.getElementById("submit-score");
+var highScoresContainer = document.getElementById('high-scores-container');
+var clearScoresBtn = document.getElementById('clear-scores');
+var highScores = document.getElementById('high-scores');
+var goBackBtn = document.getElementById('go-back');
+var viewHighScoresBtn = document.getElementById("view-high-scores");
+var initialsInput = document.getElementById("initials");
+
 
 var questions = {
     question1: "Commonly used datatypes do NOT include:",
@@ -34,12 +42,11 @@ var correctAnswers = {
     CAnswer5: "Document Object Model",
     CAnswer6: "Quotes"
 };
-// 2 ways that I can think of: predefine elements in HTML and change their visibility as needed
-// or create arrays with questions and answers that populate elements 
 
 var time = 0;
-var scores = {};
-timer.textContent = 'Time: ' + time;
+// var scores = JSON.parse(localStorage.getItem("scores"));
+var scores = [];
+timer.textContent = "Time: " + time;
 
 function setTime() {
     var timerInterval = setInterval(function() {
@@ -60,28 +67,53 @@ function inputScore() {
     choices.textContent = '';
     questionText.textContent = '';
     score.innerHTML = time;
-    highScores.setAttribute("class", "visible"); 
+    setHighScores.setAttribute("class", "visible"); 
     
-
 }
-function setScore(event) {
-    event.stopPropagation();
 
-
+function setScore() {
+    feedback.innerHTML = '';
+    var initials = initialsInput.value
+    console.log(initials);
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    if (storedScores !== null) {
+        scores = storedScores;
+    }
+    var scoreText = (initials + " - " + time).trim();
+    scores.push(scoreText);
+    localStorage.setItem("scores", JSON.stringify(scores));
+    initialsInput.value = '';
 }
 
 function displayScores() {
+    setHighScores.setAttribute("class", "hidden");
+    header.setAttribute("class", "invisible"); 
+    highScoresContainer.setAttribute("class", "visible");
+    highScores.textContent = '';
+    if (scores.length === 0) {
+        scores = JSON.parse(localStorage.getItem("scores"));
+    };
+    console.log(scores);
 
+    for (var i = 0; i < scores.length; i++) {
+        var score = scores[i];
+        var li = document.createElement("li");
+        li.innerHTML = score;
+        li.style.margin = "10px 0"
+        li.style.backgroundColor = "rgba(128, 0, 128, .5)";
+        li.style.listStyleType = "number";
+        highScores.appendChild(li);
+    };
 }
 
 startBtn.addEventListener('click', function() {
-    mainEl.innerHTML = "";
+    mainEl.setAttribute("class", "hidden");
     time = 75;
     timer.textContent = "Time: " + time;
     setTime();
 
     questionText.innerHTML = questions.question1;
-    question.id = 'question1';
+    question.id = "question1";
    
     for (var i = 0; i < answers.answer1.length; i++) {
         var button = document.createElement("button");
@@ -190,5 +222,29 @@ questionContainer.addEventListener("click", function(event){
 
 submitScore.addEventListener("click", function() {
     setScore();
+    displayScores();
+})
+
+goBackBtn.addEventListener("click", function (){
+    time = 0;
+    highScoresContainer.setAttribute("class", "hidden");
+    mainEl.setAttribute("class", "visible");
+    header.setAttribute("class", "visible");
+    time = 0;
+    timer.textContent = "Time: " + time;
+})
+
+clearScoresBtn.addEventListener("click", function() {
+    localStorage.clear();
+    scores = [];
+    highScores.textContent = '';
+});
+
+viewHighScoresBtn.addEventListener("click", function() {
+    mainEl.setAttribute("class", "hidden");
+    question.setAttribute("id", "complete");
+    questionText.innerHTML = '';
+    choices.innerHTML = '';
+    feedback.innerHTML = '';
     displayScores();
 })

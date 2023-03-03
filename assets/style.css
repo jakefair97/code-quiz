@@ -25,8 +25,21 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: hotpink;
+}
+
 .hidden {
     display: none;
+}
+
+#view-high-scores {
+    color: rgb(226, 0, 226);
+    text-decoration: none;
+}
+
+.invisible {
+    visibility: hidden;
 }
 
 .page-container {
@@ -82,7 +95,8 @@ main {
 }
 
 #high-scores {
-    line-height: 1.6;;
+    line-height: 2;
+    margin: 10px 0;
 }
 
 #submit-score {
