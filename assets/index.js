@@ -17,7 +17,6 @@ var goBackBtn = document.getElementById('go-back');
 var viewHighScoresBtn = document.getElementById("view-high-scores");
 var initialsInput = document.getElementById("initials");
 
-
 var questions = {
     question1: "Commonly used datatypes do NOT include:",
     question2: "The condition in an if/else statement is enclosed with:",
@@ -74,11 +73,13 @@ function inputScore() {
 function setScore() {
     feedback.innerHTML = '';
     var initials = initialsInput.value
-    console.log(initials);
+    // console.log(initials);
     var storedScores = JSON.parse(localStorage.getItem("scores"));
     if (storedScores !== null) {
         scores = storedScores;
     }
+    console.log(JSON.parse(localStorage.getItem("scores")));
+    console.log(scores);
     var scoreText = (initials + " - " + time).trim();
     scores.push(scoreText);
     localStorage.setItem("scores", JSON.stringify(scores));
@@ -93,7 +94,12 @@ function displayScores() {
     if (scores.length === 0) {
         scores = JSON.parse(localStorage.getItem("scores"));
     };
-    console.log(scores);
+    // console.log(scores);
+    // console.log(JSON.parse(localStorage.getItem("scores")))
+
+    if (scores === null) {
+        return;
+    };
 
     for (var i = 0; i < scores.length; i++) {
         var score = scores[i];
@@ -238,6 +244,8 @@ clearScoresBtn.addEventListener("click", function() {
     localStorage.clear();
     scores = [];
     highScores.textContent = '';
+    // console.log(scores);
+    // console.log(JSON.parse(localStorage.getItem("scores")))
 });
 
 viewHighScoresBtn.addEventListener("click", function() {
