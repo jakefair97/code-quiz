@@ -1,3 +1,5 @@
+/* General styling */
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -29,17 +31,19 @@ button:hover {
     background-color: hotpink;
 }
 
+/* class to add to elements that aren't present during the quiz */
+
 .hidden {
     display: none;
+}
+
+.invisible {
+    visibility: hidden;
 }
 
 #view-high-scores {
     color: rgb(226, 0, 226);
     text-decoration: none;
-}
-
-.invisible {
-    visibility: hidden;
 }
 
 .page-container {
@@ -67,7 +71,6 @@ main {
     text-align: left;
 }
 
-
 .feedback {
     text-align: left;
     font-size: 30px;
@@ -80,11 +83,6 @@ main {
 
 .question-text {
     margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.question {
-    margin-bottom: 10px;
     font-weight: bold;
 }
 

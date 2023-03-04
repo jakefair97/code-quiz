@@ -20,7 +20,7 @@
             <button id="start">Start Quiz</button> 
             <!-- when start quiz is clicked, main is erased and question elements come up: the question itself and the choices; when any of the choices are clicked, the next question comes up; if the correct answer is clicked, "correct" is displayed at the bottom; else "incorrect" is displayed and 10 seconds are subtracted from the timer; once the quiz is over the score is displayed and user inputs their initials; then hi scores are displayed with the option to go back to home screen or clear the hi scores -->
         </main>
-        
+        <!-- Container to hold the question when it is visible -->
         <div id="question" class="question-container">
             <span class="question-text"></span>
             <div class="choices">
@@ -28,6 +28,7 @@
             
         </div>
 
+        <!-- Display for inputting user's initials once the quiz is complete -->
         <div id="set-high-scores" class='hidden'>
             <h1>All done!</h1>
             <p>Your final score is: <span id="score"></span></p>
@@ -36,6 +37,7 @@
             <button id="submit-score">Submit</button>
         </div>
         
+        <!-- Display list of high scores in local storage -->
         <div id="high-scores-container" class="hidden">
             <h1>High Scores</h1>
             <div id="high-scores"></div>
