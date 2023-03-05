@@ -43,7 +43,6 @@ var correctAnswers = {
 };
 
 var time = 0;
-// var scores = JSON.parse(localStorage.getItem("scores"));
 var scores = [];
 timer.textContent = "Time: " + time;
 
@@ -57,6 +56,8 @@ function setTime() {
             inputScore();
         }
         else if (question.id === "complete") {
+            time++;
+            timer.textContent = "Time: " + time;
             clearInterval(timerInterval);
         }
     }, 1000);
@@ -67,23 +68,36 @@ function inputScore() {
     questionText.textContent = '';
     score.innerHTML = time;
     setHighScores.setAttribute("class", "visible"); 
-    
 }
 
 function setScore() {
     feedback.innerHTML = '';
     var initials = initialsInput.value
-    // console.log(initials);
     var storedScores = JSON.parse(localStorage.getItem("scores"));
     if (storedScores !== null) {
         scores = storedScores;
     }
     console.log(JSON.parse(localStorage.getItem("scores")));
     console.log(scores);
-    var scoreText = (initials + " - " + time).trim();
-    scores.push(scoreText);
-    localStorage.setItem("scores", JSON.stringify(scores));
+
+    var scoreObj = {"initials": initials, "score": time};
+    console.log(scoreObj.score);
+
+    if (scores.length === 0) {
+        scores.push(scoreObj);
+    } else if (scoreObj.score < scores[scores.length - 1].score) {
+        scores.push(scoreObj)
+    } else {
+        for (i in scores) {
+            if (scoreObj.score > scores[i].score) {
+                scores.splice(i, 0, scoreObj);
+                break;
+            }
+        }
+    }
     initialsInput.value = '';
+
+    localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 function displayScores() {
@@ -94,18 +108,17 @@ function displayScores() {
     if (scores.length === 0) {
         scores = JSON.parse(localStorage.getItem("scores"));
     };
-    // console.log(scores);
-    // console.log(JSON.parse(localStorage.getItem("scores")))
 
     if (scores === null) {
         return;
     };
 
     for (var i = 0; i < scores.length; i++) {
-        var score = scores[i];
         var li = document.createElement("li");
-        li.innerHTML = score;
+        var scoreText = (scores[i].initials + ' - ' + scores[i].score).trim();
+        li.innerHTML = scoreText;
         li.style.margin = "10px 0"
+        li.style.paddingLeft = "5px"
         li.style.backgroundColor = "rgba(128, 0, 128, .5)";
         li.style.listStyleType = "number";
         highScores.appendChild(li);
@@ -244,8 +257,6 @@ clearScoresBtn.addEventListener("click", function() {
     localStorage.clear();
     scores = [];
     highScores.textContent = '';
-    // console.log(scores);
-    // console.log(JSON.parse(localStorage.getItem("scores")))
 });
 
 viewHighScoresBtn.addEventListener("click", function() {
