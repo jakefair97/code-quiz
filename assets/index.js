@@ -1,3 +1,5 @@
+// variables
+
 var header = document.querySelector("header");
 var timer = document.getElementById("timer");
 var startBtn = document.getElementById("start");
@@ -9,13 +11,15 @@ var feedback = document.querySelector(".feedback");
 var choices = document.querySelector('.choices');
 var setHighScores = document.getElementById("set-high-scores");
 var score = document.getElementById("score");
-var submitScore = document.getElementById("submit-score");
+var submitScoreBtn = document.getElementById("submit-score");
 var highScoresContainer = document.getElementById('high-scores-container');
 var clearScoresBtn = document.getElementById('clear-scores');
 var highScores = document.getElementById('high-scores');
 var goBackBtn = document.getElementById('go-back');
 var viewHighScoresBtn = document.getElementById("view-high-scores");
 var initialsInput = document.getElementById("initials");
+
+// questions and answers to populate the question container and correct answers for validation
 
 var questions = {
     question1: "Commonly used datatypes do NOT include:",
@@ -42,8 +46,9 @@ var correctAnswers = {
     CAnswer6: "Quotes"
 };
 
-var time = 0;
 var scores = [];
+
+var time = 0;
 timer.textContent = "Time: " + time;
 
 function setTime() {
@@ -63,12 +68,17 @@ function setTime() {
     }, 1000);
 }
 
+// functions for the app
+// displays screen for inputting initials after quiz is complete
+
 function inputScore() {
     choices.textContent = '';
     questionText.textContent = '';
     score.innerHTML = time;
     setHighScores.setAttribute("class", "visible"); 
 }
+
+// sets and sorts scores for the display score function
 
 function setScore() {
     feedback.innerHTML = '';
@@ -100,11 +110,14 @@ function setScore() {
     localStorage.setItem("scores", JSON.stringify(scores));
 }
 
+// displays sorted scores
+
 function displayScores() {
     setHighScores.setAttribute("class", "hidden");
     header.setAttribute("class", "invisible"); 
     highScoresContainer.setAttribute("class", "visible");
     highScores.textContent = '';
+
     if (scores.length === 0) {
         scores = JSON.parse(localStorage.getItem("scores"));
     };
@@ -124,6 +137,8 @@ function displayScores() {
         highScores.appendChild(li);
     };
 }
+
+// begins quiz
 
 startBtn.addEventListener('click', function() {
     mainEl.setAttribute("class", "hidden");
@@ -239,25 +254,33 @@ questionContainer.addEventListener("click", function(event){
 
 });
 
-submitScore.addEventListener("click", function() {
+// submit score with initials to be placed into the high scores list
+
+submitScoreBtn.addEventListener("click", function() {
     setScore();
     displayScores();
 })
 
+// return to the homepage
+
 goBackBtn.addEventListener("click", function (){
     time = 0;
+    scores = [];
     highScoresContainer.setAttribute("class", "hidden");
     mainEl.setAttribute("class", "visible");
     header.setAttribute("class", "visible");
-    time = 0;
     timer.textContent = "Time: " + time;
 })
+
+// clears scores from local storage
 
 clearScoresBtn.addEventListener("click", function() {
     localStorage.clear();
     scores = [];
     highScores.textContent = '';
 });
+
+// view high scores at any time
 
 viewHighScoresBtn.addEventListener("click", function() {
     mainEl.setAttribute("class", "hidden");
