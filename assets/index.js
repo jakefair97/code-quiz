@@ -87,11 +87,8 @@ function setScore() {
     if (storedScores !== null) {
         scores = storedScores;
     }
-    console.log(JSON.parse(localStorage.getItem("scores")));
-    console.log(scores);
 
     var scoreObj = {"initials": initials, "score": time};
-    console.log(scoreObj.score);
 
     if (scores.length === 0) {
         scores.push(scoreObj);
